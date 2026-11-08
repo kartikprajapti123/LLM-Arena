@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="x-apple-disable-message-reformatting">
+    <title>LLM Arena - Verify your account</title>
+    <style>
+        @media only screen and (max-width: 620px) {
+            .container { width: 100% !important; }
+            .px { padding-left: 24px !important; padding-right: 24px !important; }
+            .h1 { font-size: 24px !important; }
+            .otp { font-size: 30px !important; letter-spacing: 6px !important; padding: 16px 20px !important; }
+        }
+    </style>
+</head>
+
+<body style="margin:0; padding:0; background-color:#F4F5FB; -webkit-text-size-adjust:100%;">
+
+    <!-- Preheader (inbox preview text) -->
+    <div style="display:none; max-height:0; overflow:hidden; opacity:0; font-size:1px; line-height:1px; color:#F4F5FB;">
+        Your LLM Arena verification code is inside. Use it to finish creating your account.
+        &nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+    </div>
+
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+        style="background-color:#F4F5FB; padding:40px 12px;">
+        <tr>
+            <td align="center">
+
+                <table role="presentation" class="container" width="600" cellpadding="0" cellspacing="0" border="0"
+                    style="width:600px; max-width:600px; background:#FFFFFF; border-radius:16px; overflow:hidden; border:1px solid #E5E7F5;">
+
+                    <!-- Theme accent bar -->
+                    <tr>
+                        <td height="6" style="height:6px; line-height:6px; font-size:0; background:#4F46E5;">&nbsp;</td>
+                    </tr>
+
+                    <!-- Logo -->
+                    <tr>
+                        <td align="center" class="px" style="padding:36px 40px 8px;">
+                            <img src="{{ base_url }}/static/logo_without_background.png"
+                                alt="LLM Arena" width="160"
+                                style="display:block; width:160px; max-width:100%; height:auto; border:0;">
+                        </td>
+                    </tr>
+
+                    <!-- Body -->
+                    <tr>
+                        <td class="px" style="padding:24px 48px 8px; font-family:Arial, Helvetica, sans-serif; color:#374151;">
+
+                            <h1 class="h1" style="margin:0 0 20px; text-align:center; font-size:28px; line-height:1.3; font-weight:700; color:#111827;">
+                                Verify your account
+                            </h1>
+
+                            <p style="margin:0 0 16px; font-size:16px; line-height:1.7;">
+                                Hi {{ username }},
+                            </p>
+
+                            <p style="margin:0 0 16px; font-size:16px; line-height:1.7;">
+                                Welcome to <strong style="color:#111827;">LLM Arena</strong>! Enter the
+                                verification code below to confirm your email and finish creating your account.
+                            </p>
+
+                        </td>
+                    </tr>
+
+                    <!-- OTP -->
+                    <tr>
+                        <td align="center" class="px" style="padding:12px 48px 28px;">
+                            <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center">
+                                <tr>
+                                    <td align="center" class="otp"
+                                        style="background:#EEF2FF; border:2px dashed #4F46E5; border-radius:12px; padding:20px 40px; font-family:'Courier New', Courier, monospace; font-size:38px; font-weight:bold; letter-spacing:10px; color:#4F46E5;">
+                                        {{ otp }}
+                                    </td>
+                                </tr>
+                            </table>
+                            <p style="margin:14px 0 0; font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#6B7280;">
+                                This code is valid for a limited time only.
+                            </p>
+                        </td>
+                    </tr>
+
+                    <!-- Security notice -->
+                    <tr>
+                        <td class="px" style="padding:0 48px 8px;">
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                                style="background:#EEF2FF; border-left:4px solid #4F46E5; border-radius:8px;">
+                                <tr>
+                                    <td style="padding:18px 20px; font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:1.7; color:#374151;">
+                                        <strong style="color:#4338CA;">Security notice</strong><br>
+                                        Never share this code with anyone. LLM Arena will never ask for it by phone
+                                        or email. If you didn't create an account, you can safely ignore this email.
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- Sign-off -->
+                    <tr>
+                        <td class="px" style="padding:28px 48px 40px; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:1.7; color:#374151;">
+                            Best regards,<br>
+                            <strong style="color:#111827;">The LLM Arena Team</strong>
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td align="center" style="background:#F8F9FE; border-top:1px solid #E5E7F5; padding:28px 24px;">
+                            <img src="{{ base_url }}/static/logo.png" alt="LLM Arena" width="36"
+                                style="display:block; width:36px; height:auto; border:0; margin:0 auto 12px;">
+                            <p style="margin:0; font-family:Arial, Helvetica, sans-serif; font-size:13px; line-height:1.7; color:#6B7280;">
+                                This is an automated message, so please don't reply to it.<br>
+                                &copy; 2026 LLM Arena. All rights reserved.
+                            </p>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </td>
+        </tr>
+    </table>
+
+</body>
+
+</html>

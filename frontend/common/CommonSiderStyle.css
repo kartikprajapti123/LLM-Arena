@@ -1,0 +1,199 @@
+.common-sider {
+    position: relative;
+
+    height: 100vh;
+
+    background: #ffffff !important;
+
+    border-right: 1px solid #edf2f7;
+
+    box-shadow: 0 8px 30px rgba(22, 119, 255, 0.08);
+
+    overflow: visible !important;
+}
+
+/* Sider Content Layout */
+
+.ant-layout-sider-children {
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+/* Floating Collapse Button */
+
+.sidebar-trigger {
+    position: absolute !important;
+
+    top: 12px;
+    right: -18px;
+
+    z-index: 100000;
+
+    width: 36px !important;
+    height: 36px !important;
+
+    background: #1677ff !important;
+
+    border: none !important;
+
+    box-shadow: 0 10px 25px rgba(22, 119, 255, 0.3);
+}
+
+.sidebar-trigger:hover {
+    background: #4096ff !important;
+}
+
+/* Mobile Button */
+
+.mobile-trigger {
+    position: fixed !important;
+
+    top: 20px;
+    left: 20px;
+
+    z-index: 1002;
+}
+
+/* Logo */
+
+.sidebar-logo {
+    height: 72px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 0 20px;
+
+    border-bottom: 1px solid #f1f5f9;
+
+    flex-shrink: 0;
+}
+
+.logo-image {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 12px;
+}
+
+.logo-title {
+    color: #1677ff;
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.logo-subtitle {
+    color: #94a3b8;
+
+    font-size: 12px;
+}
+
+/* Scrollable Menu */
+
+.ant-menu {
+    flex: 1;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    border-inline-end: none !important;
+
+    padding: 12px;
+
+    scrollbar-width: none;
+
+    -ms-overflow-style: none;
+}
+
+.ant-menu::-webkit-scrollbar {
+    display: none;
+}
+
+/* Menu Items */
+
+.ant-menu-item,
+.ant-menu-submenu-title {
+    height: 48px !important;
+
+    line-height: 48px !important;
+
+    margin: 4px 0 !important;
+
+    border-radius: 12px !important;
+
+    font-weight: 500;
+}
+
+.ant-menu-item:hover,
+.ant-menu-submenu-title:hover {
+    background: #f0f7ff !important;
+
+    color: #1677ff !important;
+}
+
+.ant-menu-item-selected {
+    background: #1677ff !important;
+
+    color: white !important;
+}
+
+.ant-menu-item-selected .anticon {
+    color: white !important;
+}
+
+.ant-menu-item-selected::after {
+    display: none !important;
+}
+
+/* Collapsed */
+
+.ant-layout-sider-collapsed .logo-title,
+.ant-layout-sider-collapsed .logo-subtitle {
+    display: none;
+}
+
+.ant-layout-sider-collapsed .sidebar-logo {
+    justify-content: center;
+}
+
+/* Overlay */
+
+.sidebar-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.4);
+
+    z-index: 999;
+}
+
+/* Mobile */
+
+@media (max-width: 991px) {
+    .common-sider {
+        position: fixed !important;
+
+        top: 0;
+        left: 0;
+        bottom: 0;
+
+        z-index: 1001;
+
+        transition: transform 0.3s ease;
+    }
+
+    .mobile-close {
+        transform: translateX(-100%);
+    }
+
+    .mobile-open {
+        transform: translateX(0);
+    }
+}

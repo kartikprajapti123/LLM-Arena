@@ -1,0 +1,59 @@
+# Virtual Environment
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Media and Static Files
+/media/
+*.media
+
+# Environment Variables
+.env
+.env.*
+!.env.example
+
+# IDEs
+.vscode/
+.idea/
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Testing and Coverage
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# Migrations (keep migrations tracked)
+# Do not ignore migrations/
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# Redis
+dump.rdb
+
+# Temporary Files
+*.tmp
+*.swp
+*.bak
+
+# Build Files
+build/
+dist/
+*.egg-info/
+.eggs/
