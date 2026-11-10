@@ -166,6 +166,8 @@ export const Project = () => {
             title: "Success",
             description: "Project updated successfully!",
           });
+          setDrawerVisible(false);
+          form.resetFields();
         })
         .catch((error) => {
           setSubmitting(false);
@@ -183,6 +185,8 @@ export const Project = () => {
             title: "Success",
             description: "Project created successfully!",
           });
+          setDrawerVisible(false);
+          form.resetFields();
         })
         .catch((error) => {
           setSubmitting(false);
@@ -192,8 +196,8 @@ export const Project = () => {
           });
         });
     }
-    setDrawerVisible(false);
-    form.resetFields();
+    
+    
     // handleListProjects(false);
   };
 

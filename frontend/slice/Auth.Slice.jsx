@@ -1,7 +1,20 @@
-import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-import { LoginService,RegisterService,ForgotPasswordService,ChangePasswordService ,OtpVerifyService,OtpResendService, getSingleUserService, updateUserService, ResetPasswordService, LogoutService, adminDashboardService,ownerDashboardService,memberDashboardService} from "../service/Auth.Service";
-
+import {
+  LoginService,
+  RegisterService,
+  ForgotPasswordService,
+  ChangePasswordService,
+  OtpVerifyService,
+  OtpResendService,
+  getSingleUserService,
+  updateUserService,
+  ResetPasswordService,
+  LogoutService,
+  adminDashboardService,
+  ownerDashboardService,
+  memberDashboardService,
+} from "../service/Auth.Service";
 
 export const LoginThunkApi = createAsyncThunk(
   "auth/LoginThunkApi",
@@ -13,15 +26,14 @@ export const LoginThunkApi = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(
         error?.response?.data?.message ||
-        error?.response?.data?.error ||
-        error?.response?.data ||
-        error?.message ||
-        "Something went wrong in Login API"
+          error?.response?.data?.error ||
+          error?.response?.data ||
+          error?.message ||
+          "Something went wrong in Login API",
       );
     }
-  }
+  },
 );
-
 
 export const RegisterThunkApi = createAsyncThunk(
   "auth/RegisterThunkApi",
@@ -31,19 +43,17 @@ export const RegisterThunkApi = createAsyncThunk(
 
       return res.data;
     } catch (error) {
-      console.log(error)
+      console.log(error);
       return rejectWithValue(
         error?.response?.data?.message ||
-        error?.response?.data?.error ||
-        error?.response?.data ||
-        error?.message ||
-        "Something went wrong in Register API"
+          error?.response?.data?.error ||
+          error?.response?.data ||
+          error?.message ||
+          "Something went wrong in Register API",
       );
     }
-  }
+  },
 );
-
-
 
 export const OtpVerifyThunkApi = createAsyncThunk(
   "auth/OtpVerifyThunkApi",
@@ -53,19 +63,17 @@ export const OtpVerifyThunkApi = createAsyncThunk(
 
       return res.data;
     } catch (error) {
-      console.log(error)
+      console.log(error);
       return rejectWithValue(
         error?.response?.data?.message ||
-        error?.response?.data?.error ||
-        error?.response?.data ||
-        error?.message ||
-        "Something went wrong in OtpVerify API"
+          error?.response?.data?.error ||
+          error?.response?.data ||
+          error?.message ||
+          "Something went wrong in OtpVerify API",
       );
     }
-  }
+  },
 );
-
-
 
 export const OtpResendThunkApi = createAsyncThunk(
   "auth/OtpResendThunkApi",
@@ -75,19 +83,17 @@ export const OtpResendThunkApi = createAsyncThunk(
 
       return res.data;
     } catch (error) {
-      console.log(error)
+      console.log(error);
       return rejectWithValue(
         error?.response?.data?.message ||
-        error?.response?.data?.error ||
-        error?.response?.data ||
-        error?.message ||
-        "Something went wrong in OtpResendThunkApi API"
+          error?.response?.data?.error ||
+          error?.response?.data ||
+          error?.message ||
+          "Something went wrong in OtpResendThunkApi API",
       );
     }
-  }
+  },
 );
-
-
 
 export const ForgotPasswordThunkApi = createAsyncThunk(
   "auth/ForgotPasswordThunkApi",
@@ -99,16 +105,14 @@ export const ForgotPasswordThunkApi = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(
         error?.response?.data?.message ||
-        error?.response?.data?.error ||
-        error?.response?.data ||
-        error?.message ||
-        "Something went wrong in ForgotPassword API"
+          error?.response?.data?.error ||
+          error?.response?.data ||
+          error?.message ||
+          "Something went wrong in ForgotPassword API",
       );
     }
-  }
+  },
 );
-
-
 
 export const ChangePasswordThunkApi = createAsyncThunk(
   "auth/ChangePasswordThunkApi",
@@ -120,15 +124,14 @@ export const ChangePasswordThunkApi = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(
         error?.response?.data?.message ||
-        error?.response?.data?.error ||
-        error?.response?.data ||
-        error?.message ||
-        "Something went wrong in ChangePassword API"
+          error?.response?.data?.error ||
+          error?.response?.data ||
+          error?.message ||
+          "Something went wrong in ChangePassword API",
       );
     }
-  }
+  },
 );
-
 
 export const ResetPasswordThunkApi = createAsyncThunk(
   "auth/ResetPasswordThunkApi",
@@ -140,13 +143,13 @@ export const ResetPasswordThunkApi = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(
         error?.response?.data?.message ||
-        error?.response?.data?.error ||
-        error?.response?.data ||
-        error?.message ||
-        "Something went wrong in resetPassword API"
+          error?.response?.data?.error ||
+          error?.response?.data ||
+          error?.message ||
+          "Something went wrong in resetPassword API",
       );
     }
-  }
+  },
 );
 
 export const LogoutThunkApi = createAsyncThunk(
@@ -159,15 +162,14 @@ export const LogoutThunkApi = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(
         error?.response?.data?.message ||
-        error?.response?.data?.error ||
-        error?.response?.data ||
-        error?.message ||
-        "Something went wrong in Logout API"
+          error?.response?.data?.error ||
+          error?.response?.data ||
+          error?.message ||
+          "Something went wrong in Logout API",
       );
     }
-  }
-)
-
+  },
+);
 
 export const getSingleUserThunkApi = createAsyncThunk(
   "auth/getSingleUserThunkApi",
@@ -179,13 +181,13 @@ export const getSingleUserThunkApi = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(
         error?.response?.data?.message ||
-        error?.response?.data?.error ||
-        error?.response?.data ||
-        error?.message ||
-        "Something went wrong in get single User  API"
+          error?.response?.data?.error ||
+          error?.response?.data ||
+          error?.message ||
+          "Something went wrong in get single User  API",
       );
     }
-  }
+  },
 );
 export const adminDashboardThunkApi = createAsyncThunk(
   "auth/adminDashboardThunkApi",
@@ -197,13 +199,13 @@ export const adminDashboardThunkApi = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(
         error?.response?.data?.message ||
-        error?.response?.data?.error ||
-        error?.response?.data ||
-        error?.message ||
-        "Something went wrong in admin dashboard  API"
+          error?.response?.data?.error ||
+          error?.response?.data ||
+          error?.message ||
+          "Something went wrong in admin dashboard  API",
       );
     }
-  }
+  },
 );
 
 export const ownerDashboardThunkApi = createAsyncThunk(
@@ -216,13 +218,13 @@ export const ownerDashboardThunkApi = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(
         error?.response?.data?.message ||
-        error?.response?.data?.error ||
-        error?.response?.data ||
-        error?.message ||
-        "Something went wrong in owner dashboard  API"
+          error?.response?.data?.error ||
+          error?.response?.data ||
+          error?.message ||
+          "Something went wrong in owner dashboard  API",
       );
     }
-  }
+  },
 );
 
 export const memberDashboardThunkApi = createAsyncThunk(
@@ -235,158 +237,157 @@ export const memberDashboardThunkApi = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(
         error?.response?.data?.message ||
-        error?.response?.data?.error ||
-        error?.response?.data ||
-        error?.message ||
-        "Something went wrong in member dashboard  API"
+          error?.response?.data?.error ||
+          error?.response?.data ||
+          error?.message ||
+          "Something went wrong in member dashboard  API",
       );
     }
-  }
+  },
 );
 
 export const updateUserThunkApi = createAsyncThunk(
   "auth/updateUserThunkApi",
-  async ({id,data}, { rejectWithValue }) => {
+  async ({ id, data }, { rejectWithValue }) => {
     try {
-      const res = await updateUserService(id,data);
+      const res = await updateUserService(id, data);
 
       return res.data;
     } catch (error) {
       return rejectWithValue(
         error?.response?.data?.message ||
-        error?.response?.data?.error ||
-        error?.response?.data ||
-        error?.message ||
-        "Something went wrong in update User  API"
+          error?.response?.data?.error ||
+          error?.response?.data ||
+          error?.message ||
+          "Something went wrong in update User  API",
       );
     }
-  }
+  },
 );
 
+const authReducer = createSlice({
+  name: "auth",
+  initialState: {
+    status: null,
+    user_detail: null,
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(LoginThunkApi.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(LoginThunkApi.fulfilled, (state, action) => {
+        state.status = "fulfilled";
+      })
+      .addCase(LoginThunkApi.rejected, (state, action) => {
+        state.status = "rejected";
+      });
 
-const authReducer=createSlice({
-    "name":"auth",
-    initialState:{
-        "status":null,
-        user_detail:null,
-    },
-    reducers:{},
-    extraReducers:((builder)=>{
-        builder
-        .addCase(LoginThunkApi.pending,(state,action)=>{
-            state.status="pending"
-        })
-        .addCase(LoginThunkApi.fulfilled,(state,action)=>{
-            state.status="fulfilled"
-        })
-        .addCase(LoginThunkApi.rejected,(state,action)=>{
-            state.status="rejected"
-        })
+    builder
+      .addCase(RegisterThunkApi.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(RegisterThunkApi.fulfilled, (state, action) => {
+        state.status = "fulfilled";
+      })
+      .addCase(RegisterThunkApi.rejected, (state, action) => {
+        state.status = "rejected";
+      });
 
-        builder
-        .addCase(RegisterThunkApi.pending,(state,action)=>{
-            state.status="pending"
-        })
-        .addCase(RegisterThunkApi.fulfilled,(state,action)=>{
-            state.status="fulfilled"
-        })
-        .addCase(RegisterThunkApi.rejected,(state,action)=>{
-            state.status="rejected"
-        })
+    builder
+      .addCase(OtpVerifyThunkApi.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(OtpVerifyThunkApi.fulfilled, (state, action) => {
+        state.status = "fulfilled";
+      })
+      .addCase(OtpVerifyThunkApi.rejected, (state, action) => {
+        state.status = "rejected";
+      });
 
-        builder
-        .addCase(OtpVerifyThunkApi.pending,(state,action)=>{
-            state.status="pending"
-        })
-        .addCase(OtpVerifyThunkApi.fulfilled,(state,action)=>{
-            state.status="fulfilled"
-        })
-        .addCase(OtpVerifyThunkApi.rejected,(state,action)=>{
-            state.status="rejected"
-        })
+    builder
+      .addCase(OtpResendThunkApi.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(OtpResendThunkApi.fulfilled, (state, action) => {
+        state.status = "fulfilled";
+      })
+      .addCase(OtpResendThunkApi.rejected, (state, action) => {
+        state.status = "rejected";
+      });
 
-        builder
-        .addCase(OtpResendThunkApi.pending,(state,action)=>{
-            state.status="pending"
-        })
-        .addCase(OtpResendThunkApi.fulfilled,(state,action)=>{
-            state.status="fulfilled"
-        })
-        .addCase(OtpResendThunkApi.rejected,(state,action)=>{
-            state.status="rejected"
-        })
+    builder
+      .addCase(ForgotPasswordThunkApi.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(ForgotPasswordThunkApi.fulfilled, (state, action) => {
+        state.status = "fulfilled";
+      })
+      .addCase(ForgotPasswordThunkApi.rejected, (state, action) => {
+        state.status = "rejected";
+      });
 
+    builder
+      .addCase(ChangePasswordThunkApi.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(ChangePasswordThunkApi.fulfilled, (state, action) => {
+        state.status = "fulfilled";
+      })
+      .addCase(ChangePasswordThunkApi.rejected, (state, action) => {
+        state.status = "rejected";
+      });
 
+    builder
+      .addCase(LogoutThunkApi.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(LogoutThunkApi.fulfilled, (state, action) => {
+        state.status = "fulfilled";
+      })
+      .addCase(LogoutThunkApi.rejected, (state, action) => {
+        state.status = "rejected";
+      });
 
-        builder
-        .addCase(ForgotPasswordThunkApi.pending,(state,action)=>{
-            state.status="pending"
-        })
-        .addCase(ForgotPasswordThunkApi.fulfilled,(state,action)=>{
-            state.status="fulfilled"
-        })
-        .addCase(ForgotPasswordThunkApi.rejected,(state,action)=>{
-            state.status="rejected"
-        })
+    builder
+      .addCase(ResetPasswordThunkApi.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(ResetPasswordThunkApi.fulfilled, (state, action) => {
+        state.status = "fulfilled";
+      })
+      .addCase(ResetPasswordThunkApi.rejected, (state, action) => {
+        state.status = "rejected";
+      });
 
-        builder
-        .addCase(ChangePasswordThunkApi.pending,(state,action)=>{
-            state.status="pending"
-        })
-        .addCase(ChangePasswordThunkApi.fulfilled,(state,action)=>{
-            state.status="fulfilled"
-        })
-        .addCase(ChangePasswordThunkApi.rejected,(state,action)=>{
-            state.status="rejected"
-        })
+    builder
+      .addCase(getSingleUserThunkApi.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(getSingleUserThunkApi.fulfilled, (state, action) => {
+        state.status = "fulfilled";
+        state.user_detail = action.payload.data;
+      })
+      .addCase(getSingleUserThunkApi.rejected, (state, action) => {
+        state.status = "rejected";
+      });
 
-        builder
-        .addCase(LogoutThunkApi.pending,(state,action)=>{
-            state.status="pending"
-        })
-        .addCase(LogoutThunkApi.fulfilled,(state,action)=>{
-            state.status="fulfilled"
-        })
-        .addCase(LogoutThunkApi.rejected,(state,action)=>{
-            state.status="rejected"
-        })
+    builder
+      .addCase(updateUserThunkApi.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(updateUserThunkApi.fulfilled, (state, action) => {
+        state.status = "fulfilled";
+        state.user_detail = {
+          ...state.user_detail,
+          profile_image: action.payload.data.profile_image,
+        };
+      })
+      .addCase(updateUserThunkApi.rejected, (state, action) => {
+        state.status = "rejected";
+      });
+  },
+});
 
-        builder
-        .addCase(ResetPasswordThunkApi.pending,(state,action)=>{
-            state.status="pending"
-        })
-        .addCase(ResetPasswordThunkApi.fulfilled,(state,action)=>{
-            state.status="fulfilled"
-        })
-        .addCase(ResetPasswordThunkApi.rejected,(state,action)=>{
-            state.status="rejected"
-        })
-
-        builder
-        .addCase(getSingleUserThunkApi.pending,(state,action)=>{
-            state.status="pending"
-        })
-        .addCase(getSingleUserThunkApi.fulfilled,(state,action)=>{
-            state.status="fulfilled"
-            state.user_detail=action.payload.data
-        })
-        .addCase(getSingleUserThunkApi.rejected,(state,action)=>{
-            state.status="rejected"
-        })
-
-        builder
-        .addCase(updateUserThunkApi.pending,(state,action)=>{
-            state.status="pending"
-        })
-        .addCase(updateUserThunkApi.fulfilled,(state,action)=>{
-            state.status="fulfilled"
-        })
-        .addCase(updateUserThunkApi.rejected,(state,action)=>{
-            state.status="rejected"
-        })
-        
-    })
-})
-
-
-export default authReducer.reducer
+export default authReducer.reducer;

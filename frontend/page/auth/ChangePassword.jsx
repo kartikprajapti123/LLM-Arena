@@ -47,7 +47,7 @@ export const ChangePassword = () => {
         localStorage.setItem("refresh", res.token.refresh);
 
         setTimeout(() => {
-          navigate("/dashboard/");
+          navigate("/");
         }, 2000);
       })
       .catch((error) => {

@@ -10,6 +10,7 @@ import {
   SettingOutlined,
   UserOutlined,
   LockOutlined,
+  FolderOpenOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   ApiOutlined,
@@ -120,9 +121,9 @@ const items = [
   ...(isAdmin
     ? [
         {
-          key: "/dashboard/",
+          key: "/",
           icon: <DashboardOutlined />,
-          label: <Link to="/dashboard/">Admin Dashboard</Link>,
+          label: <Link to="/">Admin Dashboard</Link>,
         },
         {
           key: "/llm-provider/",
@@ -139,9 +140,9 @@ const items = [
 
      ...(isOwner || isMember
     ? [ {
-          key: "/dashboard/",
+          key: "/",
           icon: <TeamOutlined />,
-          label: <Link to="/dashboard/">Dashboard</Link>,
+          label: <Link to="/">Dashboard</Link>,
         }, {
           key: "/workspace-member/",
           icon: <TeamOutlined />,
@@ -177,7 +178,7 @@ const items = [
       
         {
           key: "/project/",
-          icon: <DashboardOutlined />,
+          icon: <FolderOpenOutlined/>,
           label: <Link to="/project/">Workspace Projects</Link>,
         },
         

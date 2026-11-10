@@ -39,7 +39,7 @@ export const CommonRoutes = () => {
 
         <Route element={<CommonLayout/>}>
 
-          <Route element={<Dashboard/>} path="/dashboard/"/> 
+          <Route element={<Dashboard/>} path="/"/> 
           <Route element={<UpdateProfile/>} path="/update-profile/"/> 
           <Route element={<ResetPassword/>} path="/reset-password/"/> 
           <Route element={<UpdateWorkspace/>} path="/update-workspace/"></Route>

@@ -49,7 +49,7 @@ class LLMService:
                 prompt=prompt,
             )
 
-        if provider_name in ["cloudflare", "cloudflare workers ai", "cf"]:
+        if provider_name in ["cloudflare ai", "cloudflare workers ai", "cf","Cloudflare AI"]:
             return LLMService.generate_cloudflare(
                 provider=provider,
                 model=model,
@@ -57,12 +57,12 @@ class LLMService:
                 prompt=prompt,
             )
 
-        return LLMService.generate_openai_compatible(
-            provider=provider,
-            model=model,
-            api_key=api_key,
-            prompt=prompt,
-        )
+        # return LLMService.generate_openai_compatible(
+        #     provider=provider,
+        #     model=model,
+        #     api_key=api_key,
+        #     prompt=prompt,
+        # )
 
     # =================================================
     # Groq

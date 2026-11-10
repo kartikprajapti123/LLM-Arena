@@ -92,7 +92,7 @@ class LLMProviderViewSet(ModelViewSet):
         if serializer.is_valid():
             with transaction.atomic():
                 provider = serializer.save()
-
+                print(1)
                 # Get all workspace owners
                 owner_ids = (
                     WorkspaceModel.objects
@@ -100,7 +100,8 @@ class LLMProviderViewSet(ModelViewSet):
                     .values_list("owner_id", flat=True)
                     .distinct()
                 )
-
+                
+                print(owner_ids)
                 # Create and send notifications
                 for owner_id in owner_ids:
 
@@ -119,6 +120,7 @@ class LLMProviderViewSet(ModelViewSet):
                             "provider_name": provider.name,
                         },
                     )
+                    print(3)
 
                     # Send notification after the database transaction commits
                     transaction.on_commit(

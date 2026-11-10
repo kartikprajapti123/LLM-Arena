@@ -347,7 +347,13 @@ export const UpdateProfile = () => {
                       fontWeight: 500,
                     }}
                   >
-                    {user_detail?.user_type || "Member"}
+                    {
+  user_detail?.user_role === "admin"
+    ? "Admin"
+    : user_detail?.workspace_role === "owner"
+      ? "Owner"
+      : "Member"
+}
                   </Tag>
                 </div>
 

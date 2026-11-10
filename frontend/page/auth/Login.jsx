@@ -45,7 +45,7 @@ export const Login = () => {
         localStorage.setItem("refresh", res.token.refresh);
 
         setTimeout(() => {
-          navigate("/dashboard/");
+          navigate("/");
         }, 2000);
       })
       .catch((error) => {
@@ -85,16 +85,16 @@ export const Login = () => {
 
           localStorage.setItem("refresh", data.token.refresh);
 
-          
+          console.log(data.is_new_user)
           message.success({
             title: "Success",
             description: data.message,
           });
-          if (data.is_new_user){
+          if (data.user.is_new_user){
             navigate("/workspace-on-boarding/")
           }
           else{
-            navigate("/dashboard/")
+            navigate("/")
           }
 
           return;
