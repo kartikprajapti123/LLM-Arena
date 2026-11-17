@@ -162,7 +162,8 @@ const MOBILE_BREAKPOINT = 991;
 // WebSocket endpoint. Must match the route in your routing.py,
 // e.g. path("ws/llm-api-update/<project_id>/", LLMUpdateConsumer.as_asgi())
 // Use wss:// in production.
-const WS_BASE = "ws://localhost:8000/ws/llm-api-update";
+// const WS_BASE = "ws://localhost:8000/ws/";
+const WS_BASE = `${import.meta.env.VITE_WEBSOCKET_FRONTEND_URL}llm-api-update`;
 
 // Token sent as ?token=<jwt>. Same key the header uses ("access").
 const getWsToken = () => localStorage.getItem("access");

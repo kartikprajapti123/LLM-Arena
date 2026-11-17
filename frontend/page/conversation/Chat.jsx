@@ -91,7 +91,8 @@ const getAccessToken = () => {
   }
   return null;
 };
-const WS_BASE = "ws://localhost:8000/ws/conversations";
+// const WS_BASE = "ws://localhost:8000/ws/conversations";
+const WS_BASE = `${import.meta.env.VITE_WEBSOCKET_FRONTEND_URL}conversations`;
 const buildSocketUrl = (conversationId) => {
   const token = getAccessToken();
   const query = token ? `?token=${encodeURIComponent(token)}` : "";
