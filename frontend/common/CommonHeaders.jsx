@@ -149,7 +149,7 @@ export default function CommonHeader({
       if (!token) return;
 
       socket = new WebSocket(
-        `${WS_BASE}${WS_PATH}?token=${encodeURIComponent(token)}`,
+        `${import.meta.env.VITE_WEBSOCKET_FRONTEND_URL}notification/?token=${encodeURIComponent(token)}`,
       );
 
       socket.onopen = () => {
