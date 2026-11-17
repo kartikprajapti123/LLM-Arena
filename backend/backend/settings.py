@@ -110,7 +110,9 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": ["redis://127.0.0.1:6379/1"],
+            "hosts": [
+                {"address": "redis://127.0.0.1:6379/1", "socket_timeout": 30},
+            ],
             "prefix": "llmarena",
         },
     },
