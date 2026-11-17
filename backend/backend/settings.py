@@ -97,16 +97,24 @@ TEMPLATES = [
 # WSGI_APPLICATION = 'backend.wsgi.application'
 ASGI_APPLICATION = "backend.asgi.application"
 
+# CHANNEL_LAYERS = {
+#     "default": {
+#         # "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "BACKEND": "channels.layers.InMemoryChannelLayer",
+#         # "CONFIG": {
+#         #     "hosts": [("127.0.0.1", 6379)],
+#         # },
+#     },
+# }
 CHANNEL_LAYERS = {
     "default": {
-        # "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "BACKEND": "channels.layers.InMemoryChannelLayer",
-        # "CONFIG": {
-        #     "hosts": [("127.0.0.1", 6379)],
-        # },
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": ["redis://127.0.0.1:6379/1"],
+            "prefix": "llmarena",
+        },
     },
 }
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 DATABASES = {
