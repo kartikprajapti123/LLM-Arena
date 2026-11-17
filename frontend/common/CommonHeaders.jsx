@@ -43,7 +43,7 @@ const { Header } = Layout;
 // Use wss://your-api-domain in production.
 // const WS_BASE = "ws://localhost:8000";
 const WS_BASE = `${import.meta.env.VITE_WEBSOCKET_FRONTEND_URL}`;
-const WS_PATH = "/ws/notification/"; // must match routing.py
+const WS_PATH = "notification/"; // must match routing.py
 const HEARTBEAT_MS = 30000;
 const MAX_RETRY_DELAY_MS = 30000;
 const AUTH_FAILED_CODE = 4001; // consumer closes with this when not authenticated
