@@ -305,7 +305,14 @@ export default function CommonHeader({
               icon={<MenuUnfoldOutlined />}
               onClick={() => setMobileOpen(!mobileOpen)}
               className="mobile-header-trigger"
-            />
+              style={{
+  color: "white",
+  background: "rgb(79, 70, 229)",
+  fontSize: "21px",
+  borderRadius: "50%",
+  padding: "10px",
+  width: "40px",
+}} />
           )}
           <div className="header-welcome">
             <div className="welcome-title">
