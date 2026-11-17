@@ -4149,3 +4149,35 @@ html, body, #root {
   padding: 4px 12px;
   color:#4f46e5
 }
+
+/* Mobile responsive adjustments */
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 16px;
+    }
+
+    h1 {
+        font-size: 28px !important;
+    }
+
+    h2 {
+        font-size: 23px !important;
+    }
+
+    h3 {
+        font-size: 20px !important;
+    }
+
+    p,
+    span,
+    label {
+        font-size: 15px;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+        font-size: 15px !important;
+    }
+}
