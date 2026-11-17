@@ -197,3 +197,16 @@
         transform: translateX(0);
     }
 }
+
+.logo-image {
+  background: var(--primary-hover) !important;
+  color: #fff !important;
+  border: none !important;
+
+  /* sizing so the background looks like a badge */
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  box-sizing: border-box;
+  border-radius: 10px; /* use 50% for a circle, 0 for a square */
+}
