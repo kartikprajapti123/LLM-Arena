@@ -310,7 +310,11 @@ export default function CommonHeader({
           <div className="header-welcome">
             <div className="welcome-title">
               <ThunderboltOutlined className="welcome-icon" />{" "}
-              {user_detail?.workspace_name || "Admin Workspace"}
+              {user_detail?.workspace_name
+    ? user_detail.workspace_name.length > 8
+        ? `${user_detail.workspace_name.slice(0, 8)}...`
+        : user_detail.workspace_name
+    : "Admin Workspace"}
             </div>
             <div className="welcome-subtitle">
               Compare, evaluate, and deploy models in real-time

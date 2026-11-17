@@ -210,3 +210,10 @@
   box-sizing: border-box;
   border-radius: 10px; /* use 50% for a circle, 0 for a square */
 }
+
+@media screen and (max-width: 786px) {
+  .content-area {
+    margin: 3px !important;
+    padding: 3px !important;
+  }
+}

@@ -258,7 +258,7 @@ const items = [
       {contextHolder}
 
       {/* Mobile hamburger button: visible while sidebar is closed */}
-      {isMobile && !mobileOpen && (
+      {/* {isMobile && !mobileOpen && (
         <Button
           type="primary"
           className="sidebar-trigger"
@@ -266,7 +266,7 @@ const items = [
           onClick={() => setMobileOpen(true)}
           aria-label="Open navigation menu"
         />
-      )}
+      )} */}
 
       {/* Mobile overlay */}
       {isMobile && mobileOpen && (
