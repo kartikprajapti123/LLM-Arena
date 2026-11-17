@@ -151,6 +151,7 @@ export default function CommonHeader({
       socket = new WebSocket(
         `${import.meta.env.VITE_WEBSOCKET_FRONTEND_URL}notification/?token=${encodeURIComponent(token)}`,
       );
+      console.log("socket_connection",socket)
 
       socket.onopen = () => {
         const wasReconnect = retries > 0;
