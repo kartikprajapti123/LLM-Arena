@@ -49,7 +49,7 @@ export const WorkspaceOnBoarding = () => {
         });
         form.resetFields()
         setTimeout(()=>{
-          navigate("/dashboard/")
+          navigate("/")
 
         },2000)
       })
@@ -77,7 +77,7 @@ export const WorkspaceOnBoarding = () => {
         });
         form.resetFields()
         setTimeout(()=>{
-          navigate("/dashboard/")
+          navigate("/")
 
         },2000)
       })
