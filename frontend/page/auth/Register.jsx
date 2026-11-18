@@ -87,6 +87,14 @@ export const Register = () => {
             title: "Success",
             description: data.message,
           });
+          if (data.user.is_new_user){
+            navigate("/workspace-on-boarding/")
+          }
+          else{
+            navigate("/")
+          }
+
+          return;
 
           return;
         }
