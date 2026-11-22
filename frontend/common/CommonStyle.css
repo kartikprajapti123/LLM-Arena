@@ -4339,3 +4339,24 @@ html, body, #root {
     transition: none;
   }
 }
+
+
+@media screen and (max-width: 767px) {
+
+    .content-area {
+        margin: 8px !important;
+        padding: 12px !important;
+        border-radius: 10px !important;
+    }
+
+    .ant-layout {
+        min-width: 0;
+    }
+
+    .ant-layout-footer {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 20px 12px !important;
+        text-align: center;
+    }
+}
