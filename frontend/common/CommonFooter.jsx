@@ -17,7 +17,7 @@ export default function CommonFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <Footer className="common-footer">
+    <Footer className="common-footer" style={{position:"relative"}}>
       <div className="footer-inner">
         {/* Brand */}
         <div className="footer-brand">

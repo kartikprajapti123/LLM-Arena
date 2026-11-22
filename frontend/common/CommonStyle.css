@@ -4360,11 +4360,3 @@ html, body, #root {
         text-align: center;
     }
 }
-body {
-    overflow-x: hidden;
-}
-
-.content-area {
-    min-width: 0;
-    box-sizing: border-box;
-}
