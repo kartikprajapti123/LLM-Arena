@@ -2099,7 +2099,7 @@ html, body, #root {
   .top-action-bar > div:last-child {
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
   }
 
   .sidebar-sticky-box {
@@ -3952,6 +3952,7 @@ html, body, #root {
   .dash-legend { grid-template-columns: 1fr; }
   .dash-mini-grid { grid-template-columns: 1fr; }
   .dash-search { width: 150px; }
+  .ant-card-body{padding: 3px !important;}
 }
 @media (prefers-reduced-motion: reduce) {
   .dash-body, .dash-stat-card { transition: none; }
@@ -4180,4 +4181,161 @@ html, body, #root {
     textarea {
         font-size: 15px !important;
     }
+}
+
+
+/* ==========================================================
+   COMMON FOOTER  (append to CommonHeadersStyle.css)
+   ========================================================== */
+
+.common-footer {
+  --footer-primary: #4f46e5;
+  --footer-primary-soft: #eef2ff;
+  --footer-text: #0f172a;
+  --footer-muted: #64748b;
+  --footer-border: #e2e8f0;
+
+  background: #ffffff;
+  border-top: 1px solid var(--footer-border);
+  padding: 18px 24px;
+  margin-top: auto; /* sticks to the bottom when the page is short */
+}
+
+.common-footer .footer-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 16px 32px;
+}
+
+/* ---------- Brand ---------- */
+.common-footer .footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.common-footer .footer-logo {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: var(--footer-primary);
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.common-footer .footer-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.common-footer .footer-brand-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--footer-primary);
+}
+
+.common-footer .footer-brand-tagline {
+  font-size: 11px;
+  color: var(--footer-muted);
+}
+
+/* ---------- Links ---------- */
+.common-footer .footer-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+}
+
+.common-footer .footer-link {
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--footer-muted);
+  text-decoration: none;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.common-footer .footer-link:hover {
+  color: var(--footer-primary);
+  background: var(--footer-primary-soft);
+}
+
+.common-footer .footer-link:focus-visible {
+  outline: 2px solid var(--footer-primary);
+  outline-offset: 2px;
+}
+
+/* ---------- Copyright ---------- */
+.common-footer .footer-copy {
+  justify-self: end;
+  font-size: 12px;
+  color: var(--footer-muted);
+  text-align: right;
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+/* Tablet: brand + copyright on one row, links below */
+@media (max-width: 992px) {
+  .common-footer .footer-inner {
+    grid-template-columns: 1fr auto;
+  }
+
+  .common-footer .footer-links {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: flex-start;
+    padding-top: 12px;
+    border-top: 1px solid var(--footer-border);
+  }
+}
+
+/* Mobile: single centered column */
+@media (max-width: 576px) {
+  .common-footer {
+    padding: 16px;
+  }
+
+  .common-footer .footer-inner {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .common-footer .footer-brand {
+    justify-content: center;
+  }
+
+  .common-footer .footer-links {
+    grid-row: auto;
+    justify-content: center;
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .common-footer .footer-copy {
+    justify-self: center;
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .common-footer .footer-link {
+    transition: none;
+  }
 }

@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 
 import CommonHeader from "./CommonHeaders.jsx";
 import CommonSider from "./CommonSider.jsx";
-
+import CommonFooter from "./CommonFooter.jsx";
 const { Content } = Layout;
 
 export default function CommonLayout() {
@@ -47,6 +47,7 @@ export default function CommonLayout() {
         >
           <Outlet />
         </Content>
+         <CommonFooter />
       </Layout>
     </Layout>
   );
