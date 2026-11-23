@@ -471,16 +471,16 @@ class ConversationViewSet(ModelViewSet):
                 user=request.user
             ).first()
 
-            # if not participant or participant.role != (
-            #     ConversationParticipantModel.ParticipantRole.ADMIN
-            # ):
-            #     return Response(
-            #         {
-            #             "success": False,
-            #             "error": "You are not allowed to delete this conversation.",
-            #         },
-            #         status=status.HTTP_403_FORBIDDEN,
-            #     )
+            if not participant or participant.role != (
+                ConversationParticipantModel.ParticipantRole.ADMIN
+            ):
+                return Response(
+                    {
+                        "success": False,
+                        "error": "You are not allowed to delete this conversation.",
+                    },
+                    status=status.HTTP_403_FORBIDDEN,
+                )
 
             # Soft-delete the conversation so its message history remains.
             conversation.is_active = False
