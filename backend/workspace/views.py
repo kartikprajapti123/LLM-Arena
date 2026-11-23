@@ -590,6 +590,8 @@ class WorkspaceMemberViewSet(ModelViewSet):
             {"success": True, "message": "You joined the workspace successfully"},
             status=status.HTTP_200_OK,
         )
+        
+    
 
 
 class WorkspaceInviteViewSet(ModelViewSet):

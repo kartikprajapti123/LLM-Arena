@@ -83,17 +83,13 @@ class WorkspaceSerializer(serializers.ModelSerializer):
             return instance
     
     def to_representation(self, instance):
-        data = super().to_representation(instance)
-
-        if instance.user and instance.user.profile_image:
-            backendurl = config("BACKEND_URL")
-            data["user_profile_image"] = (
-                backendurl + "/media/" + str(instance.user.profile_image)
-            )
-        else:
-            data["user_profile_image"] = None
-
-        return data
+            data = super().to_representation(instance)
+    
+            if instance.image:
+                backendurl = config("BACKEND_URL")
+                data["image"] = backendurl + "/media/" + str(instance.image)
+    
+            return data
 
 
 class WorkspaceMemberSerializer(serializers.ModelSerializer):
@@ -150,9 +146,19 @@ class WorkspaceMemberSerializer(serializers.ModelSerializer):
                 )
 
         return attrs
-
     
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
 
+        if instance.user and instance.user.profile_image:
+            backendurl = config("BACKEND_URL")
+            data["user_profile_image"] = (
+                backendurl + "/media/" + str(instance.user.profile_image)
+            )
+        else:
+            data["user_profile_image"] = None
+
+        return data
 
 
 class WorkspaceInviteSerializer(serializers.ModelSerializer):

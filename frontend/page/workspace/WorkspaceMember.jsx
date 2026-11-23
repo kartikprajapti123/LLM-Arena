@@ -191,7 +191,7 @@ export const WorkspaceMember = () => {
       render: (text, record) => (
         <Space size="middle">
           <Avatar
-            src={record.profile_image}
+            src={record.user_profile_image}
             icon={<UserOutlined />}
             style={{ backgroundColor: "#4f46e5" }}
           />
