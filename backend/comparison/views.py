@@ -20,6 +20,9 @@ from llm.ai_judge import evaluate_responses
 from django.db import transaction
 import asyncio
 import time
+import logging
+
+logger = logging.getLogger(__name__)
 from asgiref.sync import async_to_sync
 from django.db import transaction
 from django.utils import timezone
@@ -987,20 +990,34 @@ class ComparisonViewSet(ModelViewSet):
                 comparison.save(update_fields=["winner_response"])
                 
 
-        except Exception:
-            # Log the exception in your server logs in production.
+        except Exception as exc:
+                
+            logger.exception(
+                "AI evaluation failed for comparison ID: %s",
+                comparison.id
+            )
+
             comparison.status = "failed"
             comparison.completed_at = timezone.now()
-            comparison.save(update_fields=["status", "completed_at", "updated_at"])
+
+            comparison.save(
+                update_fields=[
+                    "status",
+                    "completed_at",
+                    "updated_at"
+                ]
+            )
+
             send_comparison_update(
-    project.id,
-    {
-        "type": "comparison_failed",
-        "comparison_id": comparison.id,
-        "status": "failed",
-        "message": "AI evaluation failed.",
-    },
-)
+                project.id,
+                {
+                    "type": "comparison_failed",
+                    "comparison_id": comparison.id,
+                    "status": "failed",
+                    "message": "AI evaluation failed.",
+                },
+            )
+
             return Response(
                 {
                     "success": False,
@@ -1014,7 +1031,7 @@ class ComparisonViewSet(ModelViewSet):
                 },
                 status=status.HTTP_502_BAD_GATEWAY,
             )
-            
+
             
 
         # --------------------------------------------------

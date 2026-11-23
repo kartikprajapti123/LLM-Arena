@@ -586,7 +586,7 @@ export default function Dashboard() {
       } catch (e) {
         const msg = typeof e === "object" ? e?.message || e?.detail || JSON.stringify(e) : String(e);
         setError(msg);
-        api.error({ title: "Could not load dashboard", description: msg });
+        // api.error({ title: "Could not load dashboard", description: msg });
       } finally {
         setLoading(false);
         setRefreshing(false);
