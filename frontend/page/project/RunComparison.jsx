@@ -1051,7 +1051,7 @@ export default function RunComparison() {
                     options={results.map((response, index) => ({
                       label:
                         response.model ||
-                        `Model #${response.llm_project_model_id}`,
+                        `Model #${response.llm_project_provider_name}`,
                       value: index,
                     }))}
                   />
@@ -1117,7 +1117,7 @@ export default function RunComparison() {
                               <GeminiSparkleIcon color="#2563eb" size={16} />
                               <Text strong style={{ fontSize: 14 }}>
                                 {res.model ||
-                                  `Model #${res.llm_project_model_id}`}
+                                  `Model #${res.llm_project_provider_name}`}
                               </Text>
                             </Space>
                             <Space size={4}>

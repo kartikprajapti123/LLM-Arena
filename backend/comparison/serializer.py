@@ -3,10 +3,10 @@ from rest_framework import serializers
 from comparison.models import ComparisonModel
 from response.models import ResponseModel
 from decouple import config
-
+from response.serializer import ResponseSerializer
 
 class ComparisonSerializer(serializers.ModelSerializer):
-    responses = serializers.SerializerMethodField()
+    responses = ResponseSerializer(many=True, read_only=True)
 
     created_by_username = serializers.CharField(
         source="created_by.username",

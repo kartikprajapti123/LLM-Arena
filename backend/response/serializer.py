@@ -5,6 +5,9 @@ from response.models import ResponseModel
 
 class ResponseSerializer(serializers.ModelSerializer):
 
+    llm_project_provider_name = serializers.CharField(
+    source="llm_project_model.llm_model.provider.name"
+)
     class Meta:
         model = ResponseModel
 
@@ -12,6 +15,7 @@ class ResponseSerializer(serializers.ModelSerializer):
             "id",
             "comparison",
             "llm_project_model",
+            "llm_project_provider_name",
             "content",
             "status",
             "response_time",
