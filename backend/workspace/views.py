@@ -623,9 +623,12 @@ class WorkspaceInviteViewSet(ModelViewSet):
     ordering_fields = ["created_at"]
 
     def get_queryset(self):
+        user = self.request.user
+    
         return WorkspaceInviteModel.objects.filter(
-            workspace__owner=self.request.user
-        ).order_by("-id")
+            Q(workspace__owner=user) |
+            Q(workspace__members__user=user)
+        ).distinct().order_by("-id")
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
