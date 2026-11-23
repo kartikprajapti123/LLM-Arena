@@ -548,9 +548,12 @@ class WorkspaceMemberViewSet(ModelViewSet):
         )
 
     @action(
-        detail=False, methods=["POST"], url_path="workspace-member-create-invite-code"
-    )
+        detail=False,
+        methods=["POST"],
+        url_path="workspace-member-create-invite-code"
+        )
     def workspace_member_create_invite_code(self, request, *args, **kwargs):
+
         invite_code = request.data.get("invite_code")
 
         if not invite_code:
@@ -560,53 +563,51 @@ class WorkspaceMemberViewSet(ModelViewSet):
             )
 
         try:
-            workspace_invite_instance = WorkspaceInviteModel.objects.get(
-                invite_code=invite_code
-            )
+            with transaction.atomic():
+
+                workspace_invite_instance = (
+                    WorkspaceInviteModel.objects.select_for_update()
+                    .get(invite_code=invite_code, is_active=True)
+                )
+
+                workspace = workspace_invite_instance.workspace
+
+                member, created = WorkspaceMemberModel.objects.get_or_create(
+                    workspace=workspace,
+                    user=request.user,
+                )
+
+                conversation = ConversationModel.objects.filter(
+                    workspace=workspace,
+                    is_active=True,
+                    conversation_type="direct",  # Remove if you want another type
+                ).first()
+
+                if conversation:
+                    ConversationParticipantModel.objects.get_or_create(
+                        conversation=conversation,
+                        user=request.user,
+                        defaults={
+                            "role": ConversationParticipantModel.ParticipantRole.MEMBER,
+                        },
+                    )
+
+                workspace_invite_instance.is_active = False
+                workspace_invite_instance.save(update_fields=["is_active"])
 
         except WorkspaceInviteModel.DoesNotExist:
             return Response(
-                {"success": False, "error": "No Workspace Found with this invite code"},
+                {"success": False, "error": "Invalid or expired invite code"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
-
-        workspace_member_instance = WorkspaceMemberModel.objects.create(
-            workspace=workspace_invite_instance.workspace,
-            user=request.user,
-        )
-        workspace_invite_instance.is_active=False
-        workspace_invite_instance.save()
-        
-        workspace = workspace_invite_instance.workspace
-
-        with transaction.atomic():
-            member, created = WorkspaceMemberModel.objects.get_or_create(
-                workspace=workspace,
-                user=request.user,
-            )
-
-            conversation = ConversationModel.objects.filter(
-                workspace=workspace,
-                is_active=True,
-            ).first()
-
-            if conversation:
-                ConversationParticipantModel.objects.get_or_create(
-                    conversation=conversation,
-                    user=request.user,
-                    defaults={
-                        "role": ConversationParticipantModel.ParticipantRole.MEMBER,
-                    },
-                )
 
         return Response(
             {
                 "success": True,
-                "message": "You Joined workspace Successfully",
+                "message": "You joined the workspace successfully",
             },
             status=status.HTTP_200_OK,
         )
-
 
 class WorkspaceInviteViewSet(ModelViewSet):
     queryset = WorkspaceInviteModel.objects.all().order_by("-id")
