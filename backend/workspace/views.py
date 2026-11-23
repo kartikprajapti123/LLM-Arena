@@ -309,6 +309,7 @@ class WorkspaceMemberViewSet(ModelViewSet):
             status=status.HTTP_200_OK,
         )
 
+    
     def create(self, request, *args, **kwargs):
         serializer = self.serializer_class(
             data=request.data,
@@ -317,17 +318,32 @@ class WorkspaceMemberViewSet(ModelViewSet):
 
         if serializer.is_valid():
             with transaction.atomic():
-                # Create the workspace membership
+
+                # Create workspace membership
                 workspace_member = serializer.save()
 
                 workspace = workspace_member.workspace
-                new_member = request.user
+                new_member = workspace_member.user
+
+                # Find the existing workspace group conversation
+                conversation = ConversationModel.objects.filter(
+                    workspace=workspace,
+                    conversation_type=ConversationModel.ConversationType.GROUP,
+                ).first()
+
+                # Add the new member to the workspace group chat
+                if conversation:
+                    ConversationParticipantModel.objects.get_or_create(
+                        conversation=conversation,
+                        user=new_member,
+                        defaults={
+                            "role": ConversationParticipantModel.ParticipantRole.MEMBER
+                        }
+                    )
 
                 # Get all active workspace members except the new member
-                # Get all active workspace members except the new member
                 member_ids = set(
-                    WorkspaceMemberModel.objects
-                    .filter(
+                    WorkspaceMemberModel.objects.filter(
                         workspace=workspace,
                         is_active=True,
                     )
@@ -341,9 +357,10 @@ class WorkspaceMemberViewSet(ModelViewSet):
 
                 # Notify existing workspace members
                 for member_id in member_ids:
+
                     notification = NotificationModel.objects.create(
                         recipient_id=member_id,
-                        sender=new_member,
+                        sender=request.user,
                         notification_type="member",
                         title="New Workspace Member",
                         message=(
@@ -359,7 +376,6 @@ class WorkspaceMemberViewSet(ModelViewSet):
                         },
                     )
 
-                    # Send notification after the transaction commits
                     transaction.on_commit(
                         lambda notification=notification,
                         member_id=member_id: send_user_notification(
@@ -369,14 +385,10 @@ class WorkspaceMemberViewSet(ModelViewSet):
                                 "notification_id": str(notification.id),
                                 "title": notification.title,
                                 "message": notification.message,
-                                "notification_type": (
-                                    notification.notification_type
-                                ),
+                                "notification_type": notification.notification_type,
                                 "data": notification.data,
                                 "is_read": notification.is_read,
-                                "created_at": (
-                                    notification.created_at.isoformat()
-                                ),
+                                "created_at": notification.created_at.isoformat(),
                             },
                         )
                     )
@@ -405,6 +417,7 @@ class WorkspaceMemberViewSet(ModelViewSet):
             },
             status=status.HTTP_400_BAD_REQUEST,
         )
+
 
     def update(self, request, *args, **kwargs):
         member_instance = self.get_object()
