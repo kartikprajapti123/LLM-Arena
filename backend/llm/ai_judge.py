@@ -6,7 +6,7 @@ import time
 import random
 import logging
 import requests
-
+from decouple import config
 from statistics import mean
 
 
@@ -70,7 +70,7 @@ class AIJudgeService:
                     f"Response {index + 1} has empty content."
                 )
 
-        api_key = "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"
+        api_key = config("OPENROUTER_API_KEY")
 
         if not api_key:
             raise ValueError(
