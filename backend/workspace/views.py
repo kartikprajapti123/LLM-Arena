@@ -6,7 +6,7 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.filters import SearchFilter, OrderingFilter
-from chat.models import ConversationModel,ConversationParticipantModel
+from chat.models import ConversationModel, ConversationParticipantModel
 from workspace.models import (
     WorkspaceModel,
     WorkspaceMemberModel,
@@ -88,7 +88,7 @@ class WorkspaceViewSet(ModelViewSet):
 
         if serializer.is_valid():
             with transaction.atomic():
-                workspace_instance=serializer.save(owner=request.user)
+                workspace_instance = serializer.save(owner=request.user)
                 conversation = ConversationModel.objects.create(
                     workspace=workspace_instance,
                     conversation_type=ConversationModel.ConversationType.GROUP,
@@ -256,7 +256,6 @@ class WorkspaceMemberViewSet(ModelViewSet):
         "updated_at",
     ]
 
-   
     def get_queryset(self):
         user = self.request.user
         workspace = WorkspaceModel.objects.filter(owner=user).first()
@@ -264,20 +263,17 @@ class WorkspaceMemberViewSet(ModelViewSet):
         # 2. If not, is the user an active member?
         if workspace is None:
             membership = (
-                WorkspaceMemberModel.objects
-                .filter(user=user, is_active=True)
+                WorkspaceMemberModel.objects.filter(user=user, is_active=True)
                 .select_related("workspace")
                 .first()
             )
             workspace = membership.workspace if membership else None
-    
+
         if workspace is None:
             raise PermissionDenied("You are not a member of any workspace.")
-    
-        return (
-            WorkspaceMemberModel.objects
-            .filter(workspace=workspace)
-            .select_related("user", "workspace")
+
+        return WorkspaceMemberModel.objects.filter(workspace=workspace).select_related(
+            "user", "workspace"
         )
 
     def list(self, request, *args, **kwargs):
@@ -309,12 +305,8 @@ class WorkspaceMemberViewSet(ModelViewSet):
             status=status.HTTP_200_OK,
         )
 
-    
     def create(self, request, *args, **kwargs):
-        serializer = self.serializer_class(
-            data=request.data,
-            partial=True
-        )
+        serializer = self.serializer_class(data=request.data, partial=True)
 
         if serializer.is_valid():
             with transaction.atomic():
@@ -338,7 +330,7 @@ class WorkspaceMemberViewSet(ModelViewSet):
                         user=new_member,
                         defaults={
                             "role": ConversationParticipantModel.ParticipantRole.MEMBER
-                        }
+                        },
                     )
 
                 # Get all active workspace members except the new member
@@ -377,8 +369,7 @@ class WorkspaceMemberViewSet(ModelViewSet):
                     )
 
                     transaction.on_commit(
-                        lambda notification=notification,
-                        member_id=member_id: send_user_notification(
+                        lambda notification=notification, member_id=member_id: send_user_notification(
                             member_id,
                             {
                                 "type": "notification",
@@ -417,7 +408,6 @@ class WorkspaceMemberViewSet(ModelViewSet):
             },
             status=status.HTTP_400_BAD_REQUEST,
         )
-
 
     def update(self, request, *args, **kwargs):
         member_instance = self.get_object()
@@ -517,22 +507,17 @@ class WorkspaceMemberViewSet(ModelViewSet):
                 )
 
                 transaction.on_commit(
-                    lambda notification=notification,
-                    member_id=member_id: send_user_notification(
+                    lambda notification=notification, member_id=member_id: send_user_notification(
                         member_id,
                         {
                             "type": "notification",
                             "notification_id": str(notification.id),
                             "title": notification.title,
                             "message": notification.message,
-                            "notification_type": (
-                                notification.notification_type
-                            ),
+                            "notification_type": (notification.notification_type),
                             "data": notification.data,
                             "is_read": notification.is_read,
-                            "created_at": (
-                                notification.created_at.isoformat()
-                            ),
+                            "created_at": (notification.created_at.isoformat()),
                         },
                     )
                 )
@@ -550,10 +535,9 @@ class WorkspaceMemberViewSet(ModelViewSet):
     @action(
         detail=False,
         methods=["POST"],
-        url_path="workspace-member-create-invite-code"
-        )
+        url_path="workspace-member-create-invite-code",
+    )
     def workspace_member_create_invite_code(self, request, *args, **kwargs):
-
         invite_code = request.data.get("invite_code")
 
         if not invite_code:
@@ -564,10 +548,10 @@ class WorkspaceMemberViewSet(ModelViewSet):
 
         try:
             with transaction.atomic():
-
                 workspace_invite_instance = (
-                    WorkspaceInviteModel.objects.select_for_update()
-                    .get(invite_code=invite_code, is_active=True)
+                    WorkspaceInviteModel.objects.select_for_update().get(
+                        invite_code=invite_code, is_active=True
+                    )
                 )
 
                 workspace = workspace_invite_instance.workspace
@@ -577,10 +561,11 @@ class WorkspaceMemberViewSet(ModelViewSet):
                     user=request.user,
                 )
 
+                # Add to the workspace GROUP chat, not a direct chat
                 conversation = ConversationModel.objects.filter(
                     workspace=workspace,
                     is_active=True,
-                    conversation_type="direct",  # Remove if you want another type
+                    conversation_type=ConversationModel.ConversationType.GROUP,
                 ).first()
 
                 if conversation:
@@ -602,12 +587,10 @@ class WorkspaceMemberViewSet(ModelViewSet):
             )
 
         return Response(
-            {
-                "success": True,
-                "message": "You joined the workspace successfully",
-            },
+            {"success": True, "message": "You joined the workspace successfully"},
             status=status.HTTP_200_OK,
         )
+
 
 class WorkspaceInviteViewSet(ModelViewSet):
     queryset = WorkspaceInviteModel.objects.all().order_by("-id")
@@ -625,11 +608,14 @@ class WorkspaceInviteViewSet(ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-    
-        return WorkspaceInviteModel.objects.filter(
-            Q(workspace__owner=user) |
-            Q(workspace__members__user=user)
-        ).distinct().order_by("-id")
+
+        return (
+            WorkspaceInviteModel.objects.filter(
+                Q(workspace__owner=user) | Q(workspace__members__user=user)
+            )
+            .distinct()
+            .order_by("-id")
+        )
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
@@ -654,41 +640,39 @@ class WorkspaceInviteViewSet(ModelViewSet):
             },
             status=status.HTTP_200_OK,
         )
-        
+
     def update(self, request, *args, **kwargs):
-            instance = self.get_object()
-    
-            serializer = self.serializer_class(
-                instance, data=request.data, partial=True
-            )
-    
-            if serializer.is_valid():
-                serializer.save()
-    
-                return Response(
-                    {
-                        "success": True,
-                        "message": "Workspace Invite Updated Successfully",
-                        "data": serializer.data,
-                    },
-                    status=status.HTTP_200_OK,
-                )
-    
-            first_field, first_error_list = next(iter(serializer.errors.items()))
-    
-            first_error = (
-                first_error_list[0]
-                if isinstance(first_error_list, list)
-                else first_error_list
-            )
-    
+        instance = self.get_object()
+
+        serializer = self.serializer_class(instance, data=request.data, partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+
             return Response(
                 {
-                    "success": False,
-                    "error": first_error,
+                    "success": True,
+                    "message": "Workspace Invite Updated Successfully",
+                    "data": serializer.data,
                 },
-                status=status.HTTP_400_BAD_REQUEST,
+                status=status.HTTP_200_OK,
             )
+
+        first_field, first_error_list = next(iter(serializer.errors.items()))
+
+        first_error = (
+            first_error_list[0]
+            if isinstance(first_error_list, list)
+            else first_error_list
+        )
+
+        return Response(
+            {
+                "success": False,
+                "error": first_error,
+            },
+            status=status.HTTP_400_BAD_REQUEST,
+        )
 
     def create(self, request, *args, **kwargs):
 
@@ -820,8 +804,7 @@ class WorkspaceCredentialViewSet(ModelViewSet):
             status_filter = status_filter.lower() == "true"
             print(type(status_filter))
             queryset = queryset.filter(is_active=status_filter)
-                    
-                    
+
         page = self.paginate_queryset(queryset)
 
         if page is not None:
@@ -842,12 +825,12 @@ class WorkspaceCredentialViewSet(ModelViewSet):
 
         if not serializer.is_valid():
             first_field, first_error_list = next(iter(serializer.errors.items()))
-            
+
             first_error = (
-                        first_error_list[0]
-                        if isinstance(first_error_list, list)
-                        else first_error_list
-                    )
+                first_error_list[0]
+                if isinstance(first_error_list, list)
+                else first_error_list
+            )
             return Response(
                 {"success": False, "error": first_error},
                 status=status.HTTP_400_BAD_REQUEST,
@@ -923,12 +906,12 @@ class WorkspaceCredentialViewSet(ModelViewSet):
 
         if not serializer.is_valid():
             first_field, first_error_list = next(iter(serializer.errors.items()))
-            
+
             first_error = (
-                        first_error_list[0]
-                        if isinstance(first_error_list, list)
-                        else first_error_list
-                    )
+                first_error_list[0]
+                if isinstance(first_error_list, list)
+                else first_error_list
+            )
             return Response(
                 {"success": False, "error": first_error},
                 status=status.HTTP_400_BAD_REQUEST,
