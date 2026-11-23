@@ -459,7 +459,7 @@ class ConversationViewSet(ModelViewSet):
     def destroy(self, request, *args, **kwargs):
         try:
             conversation = self.get_object()
-
+            print(conversation.participant_records())
             participant = conversation.participant_records.filter(
                 user=request.user
             ).first()
